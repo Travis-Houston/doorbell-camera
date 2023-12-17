@@ -34,13 +34,13 @@ sudo pip3 install imutils
 sudo pip3 install opencv-python
 ```
 
-### Installing
+## Installing
 
 If you want to try, just clone this repository through:
 ```
 git clone https://github.com/Travis-Houston/doorbell-camera.git
 ```
-### Executing program
+## Executing program
 
 * Install the code through cloning in github (note that all of the files and dependencies should be downloaded so that it could work properly)
 * Run the code through this command:
