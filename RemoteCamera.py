@@ -39,11 +39,10 @@ class VidCamera(object):
         ret, jpeg = cv.imencode('.jpg', image)
         return jpeg.tobytes()
     
-    #Take a photo with a button
     def takePic(self):
-        frame = self.flipRequired(self.vs.read())
-        ret, image = cv.imencode(self.fileType, frame)
-        #current time
-        todayDate = datetime.now().strftime("%m%d%Y-%H%M%S") 
+        ret, frame = self.vs.read()
+        frame = self.flipRequired(frame)
+        # Current time
+        todayDate = datetime.now().strftime("%m%d%Y-%H%M%S")
         photo_path = os.path.join("/home/pi/Desktop/bellcamera/picture", f"{self.photoString}_{todayDate}{self.fileType}")
         cv.imwrite(photo_path, frame)
