@@ -58,6 +58,6 @@ sudo python3 your_path_to_project/Main.cpp
 
 ## Acknowledgments
 
-
-* [Pi-Smart-Doorbell](https://github.com/EbenKouao/Pi-Smart-Doorbell.git)
-* [pi-camera-stream-flask](https://github.com/EbenKouao/pi-camera-stream-flask)
+* [Pi-Smart-Doorbell (EbenKouao)](https://github.com/EbenKouao/Pi-Smart-Doorbell.git)
+* [pi-camera-stream-flask (EbenKouao)](https://github.com/EbenKouao/pi-camera-stream-flask)
+* [shittydoorbellcam (codingwatermelon)](https://github.com/codingwatermelon/shittydoorbellcam)
