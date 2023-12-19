@@ -2,13 +2,27 @@ from flask import Flask, render_template, Response, request
 from RemoteCamera import VidCamera
 import time
 import threading
+from timeit import default_timer as timer
 import os
+import RPi.GPIO as GPIO
+import subprocess
+from datetime import datetime
 
 #flip if camera is upside down
 piCamera = VidCamera(flip=False)
 
+state = False
+
+# CHANGME Change variables depending on your situation
+url = "https://discord.com/api/webhooks/1183288853650477116/F_efA77TF_Mjbg_FdmegWmAXkV_TloVB7r7zUjkmJkLfxMuei0X5LO2ZjDCtjfOz-BEv"
+ip_address = subprocess.getoutput('hostname -I')
+camURL = "http://" + ip_address.strip() + ":5000/"
+
 # Flask
 app = Flask(__name__)
+
+startTimer = timer()
+endTimer = 0
 
 #background process
 @app.route('/lock')
@@ -46,6 +60,44 @@ def take_picture():
     piCamera.takePic()
     return "None"
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+button_pressed = False  # Flag to track the button state
+
+@app.route('/button')    
+def button_callback(channel):
+    
+    state = GPIO.input(channel)
+    
+    if(state == 1):
+        now = datetime.now()
+        webhook = "Someone is knocking your door at {}: {}".format(now, camURL)
+        subprocess.Popen(['/home/pi/Desktop/BellCamera2/webhookdiscord.sh', webhook], stdout=subprocess.DEVNULL)
+        print("button pushed")
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(13, GPIO.RISING, callback=button_callback)
+
+#Button testing (Still in progress)
+"""
+@app.route('/button')
+def button_callback(channel):
+    state = GPIO.input(13)
+    
+    if state == False and not button_pressed: # Assuming GPIO.HIGH represents button pressed
+        now = datetime.now()
+        webhook = "Someone is at your door: '{}'".format(camURL)
+        subprocess.Popen(['/home/pi/Desktop/BellCamera2/webhookdiscord.sh', webhook], stdout=subprocess.DEVNULL)
+        print("Button pushed")
+        button_pressed = True
+    
+    if state == True:
+        button_pressed = False    
+"""
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
-    
