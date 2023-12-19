@@ -1,21 +1,23 @@
 # OpenCV smart doorbell
 
-simple Doorbell camera utilize openCV and servo to Lock/Unlock doors.
+A simple doorbell camera utilizes openCV and servo to Lock/Unlock doors.
 
 ## Description
 
-This is one of my starting project for a smart doorbell system using OpenCV and raspberry pi. I plan to expand my project with a touchpad that will trigger a speaker as a actual doorbell and fixing the face detection in the future.
-For now, The project consist of just a camera, a servo and a raspberry pi 3.
+This is one of my starting projects for a smart doorbell system using OpenCV and raspberry pi. I plan to expand my project with a touchpad that will trigger a speaker as a doorbell and fix face detection in the future.
+For now, The project consists of just a camera, a servo, a touch sensor, and a Raspberry Pi 3:
+* When the sensor is touched, it will send a discord webhook message to your discord server.
+* A flask Website that shows the camera with features like: taking images, unlocking/ locking the door with a servo.
 
 ## How it works
-The output of the camera module (which is the live video) will be streamed through Flask. Through the same network, all devices will be able to see these output through a webpage through:
+The output of the camera module (which is the live video) will be streamed through Flask. Through the same network, all devices will be able to see these outputs through a webpage:
 ```
 <your raspberry pi IP:5000>
  ```
 
 ## Dependencies
 
-Install the following dependencies to create camera stream.
+You can just install the following dependencies to create a camera stream.
 
 ```
 sudo apt-get update 
@@ -36,7 +38,7 @@ sudo pip3 install opencv-python
 
 ## Installing
 
-If you want to try, just clone this repository through:
+If you want to try, clone this repository through:
 ```
 git clone https://github.com/Travis-Houston/doorbell-camera.git
 ```
