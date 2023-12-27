@@ -1,5 +1,4 @@
 import cv2 as cv
-from imutils.video.pivideostream import PiVideoStream
 import imutils
 import time
 from datetime import datetime
@@ -44,5 +43,5 @@ class VidCamera(object):
         frame = self.flipRequired(frame)
         # Current time
         todayDate = datetime.now().strftime("%m%d%Y-%H%M%S")
-        photo_path = os.path.join("/home/pi/Desktop/bellcamera/picture", f"{self.photoString}_{todayDate}{self.fileType}")
+        photo_path = os.path.join("/home/pi/Desktop/IoT/doorbell-camera/picture", f"{self.photoString}_{todayDate}{self.fileType}")
         cv.imwrite(photo_path, frame)

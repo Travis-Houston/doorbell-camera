@@ -73,7 +73,7 @@ def button_callback(channel):
     if(state == 1):
         now = datetime.now()
         webhook = "Someone is knocking your door at {}: {}".format(now, camURL)
-        subprocess.Popen(['/home/pi/Desktop/BellCamera2/webhookdiscord.sh', webhook], stdout=subprocess.DEVNULL)
+        subprocess.Popen(['/home/pi/Desktop/IoT/doorbell-camera/webhookdiscord.sh', webhook], stdout=subprocess.DEVNULL)
         print("button pushed")
 
 GPIO.setwarnings(False)
